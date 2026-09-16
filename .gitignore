@@ -1,0 +1,8 @@
+Makefile
+build/
+vendored/
+resources/
+CMakeLists.txt
+compile_flags.txt
+run.sh
+.clang-format
