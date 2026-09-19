@@ -1,6 +1,6 @@
 #include "camera.h"
 
-void AUX_Camera_init(struct AUX_Camera *cam, const double x, const double y,
+void ENG_Camera_init(struct ENG_Camera *cam, const double x, const double y,
 		     const double zoom)
 {
 	cam->cam_x = x;
@@ -8,13 +8,13 @@ void AUX_Camera_init(struct AUX_Camera *cam, const double x, const double y,
 	cam->zoom  = zoom;
 }
 
-struct AUX_Coordinate AUX_Camera_world_to_screen(const struct AUX_Camera *cam,
+struct ENG_Coordinate ENG_Camera_world_to_screen(const struct ENG_Camera *cam,
 						 const int    win_width,
 						 const int    win_height,
 						 const double world_x,
 						 const double world_y)
 {
-	struct AUX_Coordinate ret;
+	struct ENG_Coordinate ret;
 
 	double offset_x = (world_x - cam->cam_x) * cam->zoom;
 	double offset_y = (world_y - cam->cam_y) * cam->zoom;

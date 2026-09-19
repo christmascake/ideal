@@ -29,7 +29,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv)
 		return SDL_APP_FAILURE;
 	}
 
-	AUX_init_window(&state->main_window);
+	ENG_Window_init(&state->main_window);
 
 	if (!state->main_window.win) {
 		SDL_Log("SDL_CreateWindow failed: %s\n", SDL_GetError());
@@ -37,14 +37,19 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv)
 		return SDL_APP_FAILURE;
 	}
 
-	state->renderer = SDL_CreateRenderer(state->main_window.win, NULL);
+	state->main_renderer.renderer =
+		SDL_CreateRenderer(state->main_window.win, NULL);
 
-	state->tex = IMG_LoadTexture(state->renderer, "resources/components/"
-						      "555_4x6.png");
+	state->tex = IMG_LoadTexture(state->main_renderer.renderer, "resources/"
+								    "components"
+								    "/"
+								    "555_4x6."
+								    "png");
 
-	AUX_Camera_init(&state->main_camera, 0.0, 0.0, 50);
-	AUX_Canvas_init(&state->main_canvas, state->main_window.width,
-			state->main_window.height);
+	ENG_Camera_init(&state->main_camera, 0.0, 0.0, 50);
+
+	ENG_Geometry_init(&state->main_geometry, state->main_window.width,
+			  state->main_window.height);
 
 	state->needs_render = true;
 	state->is_running   = true;
